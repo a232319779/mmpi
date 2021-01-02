@@ -1,0 +1,5 @@
+bitly.com
+bit.ly
+t.co
+t.me
+tinyurl.com
