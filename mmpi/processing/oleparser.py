@@ -21,14 +21,14 @@ class OleParser(Processing):
 
     @classmethod
     def init_once(cls):
-        log.debug("Initializing ZipParser...")
+        log.debug("Initializing OleParser...")
 
         try:
             # nothing to do
             cls.vr = VBA_RUN()
         except Exception as e:
             raise ProcessingError(
-                "There was a syntax error in one or more ZipParser: %s" % e
+                "There was a syntax error in one or more OleParser: %s" % e
             )
 
     def run(self):

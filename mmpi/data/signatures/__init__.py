@@ -6,4 +6,4 @@
 # @Software: Visual Studio Code
 
 
-from . import eml, html, zip, ole, rtf, other
+from . import eml, html, zip, ole, rtf, other, lnk

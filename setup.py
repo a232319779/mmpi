@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
 do_setup(
     name="mmpi",
-    version="0.0.1",
+    version="0.1.1",
     author="ddvv",
     author_email="dadavivi512@gmail.com",
     description="email detected library",
