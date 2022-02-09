@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
 do_setup(
     name="mmpi",
-    version="0.1.1",
+    version="0.1.2",
     author="ddvv",
     author_email="dadavivi512@gmail.com",
     description="email detected library",
@@ -81,6 +81,6 @@ do_setup(
     license="MIT",
     include_package_data=True,
     install_requires=[
-        "olefile==0.46", "yara-python==4.0.2",
+        "olefile==0.46", "yara-python",
     ],
 )

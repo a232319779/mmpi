@@ -8,7 +8,7 @@
 $ pip install mmpi
 ```
 
-备注：`windows`安装`yara-python`，可以从[这里](https://github.com/VirusTotal/yara-python/releases)下载
+备注：`windows`安装`yara-python`，可以从[这里](https://pypi.org/project/yara-python/#files)下载，再使用`pip install yara_python-xx-xx-xx-win_amd64.whl`进行安装
 
 ## 使用
 
