@@ -7,6 +7,7 @@
 
 
 import json
+from string import ascii_letters
 import sys
 from mmpi.core.plugins import RunProcessing, RunSignatures
 from mmpi.common.filetypes import get_support_file_type
@@ -73,4 +74,4 @@ def main():
     mmpi_ins = mmpi()
     mmpi_ins.parse(sys.argv[1])
     report = mmpi_ins.get_report()
-    print(json.dumps(report, indent=4))
+    print(json.dumps(report, indent=4, ensure_ascii=False))
