@@ -1,0 +1,2 @@
+olefile==0.46
+yara-python
