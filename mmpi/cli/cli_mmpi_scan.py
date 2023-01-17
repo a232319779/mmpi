@@ -8,6 +8,8 @@
 
 
 import argparse
+from colorama import Fore
+from colorama import init
 from mmpi.version import NEXTB_MMPI_VERSION
 from mmpi.common.common import get_file_list
 from mmpi.main import mmpi
@@ -19,7 +21,9 @@ def parse_cmd():
     """
     parser = argparse.ArgumentParser(
         prog="nextb-mmpi-scan",
-        description="使用nextb-mmpi-scan工具扫描指定的邮件目录或者邮件文件。版本号：{}".format(NEXTB_MMPI_VERSION),
+        description="使用nextb-mmpi-scan工具扫描指定的邮件目录或者邮件文件。版本号：{}".format(
+            NEXTB_MMPI_VERSION
+        ),
         epilog="使用方式：nextb-mmpi-scan -d $eml_dir",
     )
     parser.add_argument(
@@ -45,9 +49,11 @@ def parse_cmd():
 
     return args
 
+
 def scans(email_files):
     mmpi_ins = mmpi()
-    print("nextb-mmpi-scan扫描开始...")
+    init(autoreset=True)
+    print(Fore.CYAN + "nextb-mmpi-scan扫描开始...")
     for ef in email_files:
         mmpi_ins.parse(ef)
         report = mmpi_ins.get_report()
@@ -55,11 +61,11 @@ def scans(email_files):
         if signatures:
             names = [s.get("name") for s in signatures]
             names_str = "|".join(names)
-            print("{} -- {}".format(ef, names_str))
+            print("{} -- {}{}".format(ef, Fore.RED, names_str))
         else:
-            print("{} -- 未检出".format(ef))
-    print("nextb-mmpi-scan扫描完成...")
-        
+            print("{} -- {}安全".format(ef, Fore.GREEN))
+    print(Fore.CYAN + "nextb-mmpi-scan扫描完成...")
+
 
 def run():
     """
@@ -72,5 +78,4 @@ def run():
     elif args.email_file:
         scans([args.email_file])
     else:
-        print("邮件路径或者邮件文件不能为空。")
-        exit(0)
+        print("邮件路径或者邮件文件不能为空。请使用 -h 参数查看帮助。")
