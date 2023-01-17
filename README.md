@@ -12,11 +12,13 @@ $ pip install mmpi
 
 ## 使用
 
-### 1. 命令执行
+### 1. 命令行工具
 
-```
-$ mmpi-run $email_path
-```
+|命令行|说明|使用示例|
+|----|----|----|
+|mmpi-run|使用mmpi-run工具扫描指定的邮件文件,并返回完整报告|`mmpi-run $email_file`|
+|nextb-mmpi-scan|使用nextb-mmpi-scan工具扫描指定的邮件目录或者邮件文件|`nextb-mmpi-scan -d $email_dir`|
+
 ### 2. 快速开始
 
 ```
