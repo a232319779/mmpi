@@ -81,8 +81,8 @@ class PEFakeDocument(Signature):
             if result.get('type', '') == self.sig_type:
                 infos = result.get('value', {}).get('infos', [])
                 for info in infos:
-                    file_type = info.get('type')
-                    file_name = info.get('name')
+                    file_type = info.get('type', '')
+                    file_name = info.get('name', '')
                     space_count = file_name.count('  ')
                     if 'exe' == file_type and space_count > 20:
                         self.mark(type="zip", tag=self.name, data=info.get('name'))
