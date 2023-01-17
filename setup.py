@@ -22,6 +22,7 @@ def read_version():
     # 默认返回
     return "0.2.1"
 
+
 def read_readme():
     """
     读取README信息
@@ -29,11 +30,13 @@ def read_readme():
     with open("./README.md", "r", encoding="utf8") as f:
         return f.read()
 
+
 def do_setup(**kwargs):
     try:
         setuptools.setup(**kwargs)
     except (SystemExit, Exception) as e:
         exit(1)
+
 
 version = read_version()
 long_description = read_readme()
@@ -59,11 +62,9 @@ do_setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
     keywords=[],
     license="MIT",
     include_package_data=True,
-    install_requires=[
-        "olefile==0.46", "yara-python",
-    ],
+    install_requires=["olefile==0.46", "yara-python", "colorama==0.4.6"],
 )
