@@ -51,6 +51,7 @@ do_setup(
     entry_points={
         "console_scripts": [
             "mmpi-run = mmpi.main:main",
+            "nextb-mmpi-scan = mmpi.cli.cli_mmpi_scan:run",
         ]
     },
     classifiers=[
