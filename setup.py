@@ -66,5 +66,11 @@ do_setup(
     keywords=[],
     license="MIT",
     include_package_data=True,
-    install_requires=["olefile==0.46", "yara-python", "colorama==0.4.6"],
+    install_requires=[
+        "olefile==0.46",
+        "yara-python",
+        "colorama==0.4.6",
+        "prettytable==3.6.0",
+        "tqdm==4.62.3",
+    ],
 )
