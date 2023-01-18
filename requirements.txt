@@ -1,0 +1,5 @@
+olefile==0.46
+colorama==0.4.6
+tqdm==4.62.3
+prettytable==3.6.0
+yara-python

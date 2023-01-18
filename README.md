@@ -1,8 +1,8 @@
 # MMPI
 
-`mmpi`，一款邮件快速检测python库，基于[`community`](https://github.com/cuckoosandbox/community)框架设计开发。支持对邮件头、邮件正文、邮件附件的检测，输出json检测报告。
+`mmpi`，一款邮件快速检测python库，基于[`community`](https://github.com/cuckoosandbox/community)框架设计开发。支持对邮件头、邮件正文、邮件附件的检测，并输出检测结果。
 
-## 安装
+## 一、安装
 
 ```
 $ pip install mmpi
@@ -10,14 +10,16 @@ $ pip install mmpi
 
 备注：`windows`安装`yara-python`，可以从[这里](https://pypi.org/project/yara-python/#files)下载，再使用`pip install yara_python-xx-xx-xx-win_amd64.whl`进行安装
 
-## 使用
+## 二、使用
 
-### 1. 命令执行
+### 2.1 命令行工具
 
-```
-$ mmpi-run $email_path
-```
-### 2. 快速开始
+|命令行|说明|使用示例|结果输出|
+|----|----|----|----|
+|nextb-mmpi-scan|使用nextb-mmpi-scan工具扫描指定的邮件目录或者邮件文件|`nextb-mmpi-scan -s $email_dir`|输出格式参考[扫描结果](#三扫描结果输出)|
+|nextb-mmpi-run|使用nextb-mmpi-run工具扫描指定的邮件文件,并返回完整报告|`nextb-mmpi-run -f $email_file`|输出格式参考[报告格式](#四报告格式)|
+
+### 2.2 快速开始
 
 ```
 from mmpi import mmpi
@@ -35,7 +37,31 @@ if __name__ == "__main__":
 
 ```
 
-## 报告格式
+## 三、扫描结果输出
+
+扫描输出格式如下
+
+```
+> nextb-mmpi-scan.exe -s .
+nextb-mmpi-scan扫描中: 100%|████████████████████████████████████████████████████████████████████████████████████| 11/11 [00:00<00:00, 23.35eml/s]
++----------+--------------------+
+| 邮件名称 | NextB-mmpi命中标签 |
++----------+--------------------+
+| .\1.eml  |       未检出       |
+| .\10.eml |   spam_detection   |
+| .\11.eml |       未检出       |
+| .\2.eml  |       未检出       |
+| .\3.eml  |       未检出       |
+| .\4.eml  |  invalid_zip_file  |
+| .\5.eml  | ole_type_not_match |
+| .\6.eml  |       未检出       |
+| .\7.eml  |   spam_detection   |
+| .\8.eml  |       未检出       |
+| .\9.eml  |   spam_detection   |
++----------+--------------------+
+```
+
+## 四、报告格式
 
 包含固定字段：
 
@@ -222,21 +248,21 @@ if __name__ == "__main__":
 }
 ```
 
-## 检测简要说明
+## 五、检测简要说明
 
-### 1. 邮件头检测
+### 5.1 邮件头检测
 
 邮件头解析提取邮件发件人姓名、邮箱、收件人姓名、邮箱、邮件主题、发送时间、发送IP。
 
 通过对发件人邮箱、发送IP做黑名单匹配，实现邮件头检测。
 
-### 2. 邮件正文检测
+### 5.2 邮件正文检测
 
 邮件正文解析提取text、html格式内容。
 
 对html文件做分析，实现诸如探针检测、钓鱼检测、垃圾邮件检测等检测逻辑。
 
-### 3. 邮件附件检测
+### 5.3 邮件附件检测
 
 邮件附件检测，支持以下文件格式：
 
@@ -250,7 +276,7 @@ if __name__ == "__main__":
 * 基本信息规则检测
 * `yara`规则检测
 
-## 感谢
+## 六、感谢
 
 * neil
 * [cuckoosandbox](https://github.com/cuckoosandbox/community)
