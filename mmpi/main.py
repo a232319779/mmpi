@@ -68,10 +68,3 @@ class mmpi(object):
                     signatures.append(info)
 
         return signatures
-
-
-def main():
-    mmpi_ins = mmpi()
-    mmpi_ins.parse(sys.argv[1])
-    report = mmpi_ins.get_report()
-    print(json.dumps(report, indent=4, ensure_ascii=False))
