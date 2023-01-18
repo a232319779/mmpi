@@ -7,9 +7,11 @@
 # @WeChat   : NextB
 
 
+import os
 import argparse
-from colorama import Fore
-from colorama import init
+from colorama import Fore, Style
+from prettytable import PrettyTable
+from tqdm import tqdm
 from mmpi.version import NEXTB_MMPI_VERSION
 from mmpi.common.common import get_file_list
 from mmpi.main import mmpi
@@ -21,26 +23,17 @@ def parse_cmd():
     """
     parser = argparse.ArgumentParser(
         prog="nextb-mmpi-scan",
-        description="使用nextb-mmpi-scan工具扫描指定的邮件目录或者邮件文件。版本号：{}".format(
+        description="使用nextb-mmpi-scan工具扫描指定的email目录或者email文件。版本号：{}".format(
             NEXTB_MMPI_VERSION
         ),
-        epilog="使用方式：nextb-mmpi-scan -d $eml_dir",
+        epilog="使用方式：nextb-mmpi-scan -s $eml_dir",
     )
     parser.add_argument(
-        "-d",
-        "--dir",
-        help="指定扫描路径。路径参数优先级最高，指定 -d 参数后，会自动忽略 -f 参数。",
+        "-s",
+        "--scan",
+        help="扫描指定的email路径或者email文件。",
         type=str,
-        dest="email_dir",
-        action="store",
-        default=None,
-    )
-    parser.add_argument(
-        "-f",
-        "--file",
-        help="指定扫描文件.",
-        type=str,
-        dest="email_file",
+        dest="emails",
         action="store",
         default=None,
     )
@@ -52,19 +45,24 @@ def parse_cmd():
 
 def scans(email_files):
     mmpi_ins = mmpi()
-    init(autoreset=True)
-    print(Fore.CYAN + "nextb-mmpi-scan扫描开始...")
-    for ef in email_files:
+    results = list()
+    for ef in tqdm(
+        email_files, unit="eml", desc="{}nextb-mmpi-scan扫描中".format(Fore.CYAN)
+    ):
         mmpi_ins.parse(ef)
         report = mmpi_ins.get_report()
         signatures = report.get("signatures", [])
         if signatures:
             names = [s.get("name") for s in signatures]
             names_str = "|".join(names)
-            print("{} -- {}{}".format(ef, Fore.RED, names_str))
+            tags = "{}{}{}".format(Fore.RED, names_str, Style.RESET_ALL)
         else:
-            print("{} -- {}安全".format(ef, Fore.GREEN))
-    print(Fore.CYAN + "nextb-mmpi-scan扫描完成...")
+            tags = "{}未检出{}".format(Fore.GREEN, Style.RESET_ALL)
+        results.append([ef, tags])
+    x = PrettyTable()
+    x.field_names = ["邮件名称", "NextB-mmpi命中标签"]
+    x.add_rows(results)
+    print(x)
 
 
 def run():
@@ -72,10 +70,8 @@ def run():
     CLI命令行入口
     """
     args = parse_cmd()
-    if args.email_dir:
-        email_files = get_file_list(args.email_dir)
+    if os.path.isdir(args.emails):
+        email_files = get_file_list(args.emails)
         scans(email_files)
-    elif args.email_file:
-        scans([args.email_file])
     else:
-        print("邮件路径或者邮件文件不能为空。请使用 -h 参数查看帮助。")
+        scans([args.emails])
