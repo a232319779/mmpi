@@ -53,7 +53,7 @@ do_setup(
     packages=setuptools.find_packages(exclude=["tests"]),
     entry_points={
         "console_scripts": [
-            "mmpi-run = mmpi.main:main",
+            "nextb-mmpi-run = mmpi.cli.cli_mmpi_run:run",
             "nextb-mmpi-scan = mmpi.cli.cli_mmpi_scan:run",
         ]
     },
