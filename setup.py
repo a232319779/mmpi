@@ -55,6 +55,7 @@ do_setup(
         "console_scripts": [
             "nextb-mmpi-run = mmpi.cli.cli_mmpi_run:run",
             "nextb-mmpi-scan = mmpi.cli.cli_mmpi_scan:run",
+            "nextb-mmpi-get-html = mmpi.cli.cli_mmpi_get_html:run",
         ]
     },
     classifiers=[

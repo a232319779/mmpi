@@ -7,4 +7,4 @@
 # @WeChat   : NextB
 
 
-NEXTB_MMPI_VERSION = "0.2.3"
+NEXTB_MMPI_VERSION = "0.3.0"
